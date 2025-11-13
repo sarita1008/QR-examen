@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transpersonal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="welcome-message">
+        <h2>¡Bienvenido!</h2>
+        <p>A continuacion veras la habilidad Socioemocional TranspersonalS.</p>
+    </div>
+
+    <div class="background-carousel"></div>
+
+    <button id="prev-btn" class="nav-btn">&lt;</button>
+    <button id="next-btn" class="nav-btn">&gt;</button>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- CÓDIGO DEL MENSAJE DE BIENVENIDA ---
+            if (sessionStorage.getItem('hasSeenMessage')) {
+                document.getElementById('welcome-message').style.display = 'none';
+            } else {
+                sessionStorage.setItem('hasSeenMessage', 'true');
+            }
+
+            // --- CÓDIGO DEL CARRUSEL ---
+
+            // 1. Configuración
+            const images = [
+                'Transpersonal - Examen-01.jpg',    // Imagen 0
+                'Transpersonal - Examen-02.jpg'
+                
+                  // Imagen 1
+                // ¡Añade más imágenes aquí si quieres!
+                // 'imagen3.jpg',
+                // 'imagen4.jpg'
+            ];
+            let currentIndex = 0; // Empezamos en la primera imagen
+            let autoSlideTimer; // Variable para guardar el temporizador
+
+            // 2. Elementos del HTML
+            const carousel = document.querySelector('.background-carousel');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            // 3. Función para mostrar una imagen
+            function showSlide(index) {
+                // Actualiza el índice
+                currentIndex = index;
+                // Cambia la imagen de fondo del carrusel
+                carousel.style.backgroundImage = `url('${images[currentIndex]}')`;
+            }
+
+            // 4. Funciones de control
+            function nextSlide() {
+                // Calcula el siguiente índice, dando la vuelta si llega al final
+                let newIndex = (currentIndex + 1) % images.length;
+                showSlide(newIndex);
+            }
+
+            function prevSlide() {
+                // Calcula el índice anterior, dando la vuelta si llega al inicio
+                let newIndex = (currentIndex - 1 + images.length) % images.length;
+                showSlide(newIndex);
+            }
+
+            // 5. Función para el autoplay
+            function startAutoSlide() {
+                // Limpia cualquier temporizador anterior
+                clearInterval(autoSlideTimer);
+                // Inicia un nuevo temporizador que llama a nextSlide() cada 7 segundos
+                autoSlideTimer = setInterval(nextSlide, 7000); // 7000 milisegundos = 7 segundos
+            }
+
+            // 6. Eventos de los botones
+            nextBtn.addEventListener('click', function() {
+                nextSlide(); // Mueve a la siguiente imagen
+                startAutoSlide(); // Reinicia el temporizador
+            });
+
+            prevBtn.addEventListener('click', function() {
+                prevSlide(); // Mueve a la imagen anterior
+                startAutoSlide(); // Reinicia el temporizador
+            });
+
+            // 7. Iniciar todo
+            showSlide(0); // Muestra la primera imagen al cargar
+            startAutoSlide(); // Inicia el pase automático
+
+        });
+    </script>
+
+</body>
+</html>
