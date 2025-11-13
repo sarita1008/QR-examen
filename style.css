@@ -22,7 +22,7 @@ body {
 
     /* Imagen de fondo inicial (la primera de tu lista) */
     /* ¡Asegúrate que coincida con la primera imagen de tu script! */
-    background-image: url('Transpersonal\ -\ Examen-01.jpg');
+    background-image: url('Transpersonal - Examen-01.jpg');
 
     /* Transición suave para el cambio de imagen de fondo */
     transition: background-image 0.5s ease-in-out;
